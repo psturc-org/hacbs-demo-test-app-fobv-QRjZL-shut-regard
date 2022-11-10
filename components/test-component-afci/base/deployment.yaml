@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: test-component-afci
     spec:
       containers:
-      - image: quay.io/psturc/test-images:67c6a92946a84cc98c9de1641dc9c26c
+      - image: quay.io/psturc/test-images@sha256:a84336c146ebccf9967e54dc798f428e685aa43db654d6517fe50eb21ea70855
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
