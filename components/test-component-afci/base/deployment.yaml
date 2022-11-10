@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test-component-afci
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test-component-afci
+    app.kubernetes.io/part-of: hacbs-demo-test-app-fobv
+  name: test-component-afci
+  namespace: hacbs-e2e-aspk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: test-component-afci
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: test-component-afci
+    spec:
+      containers:
+      - image: quay.io/psturc/test-images:67c6a92946a84cc98c9de1641dc9c26c
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: container-image
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 8081
+        resources: {}
+status: {}
